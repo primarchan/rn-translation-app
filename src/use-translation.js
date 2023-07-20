@@ -1,5 +1,6 @@
 import { I18n } from "i18n-js";
 import { useEffect, useState } from "react";
+import { format } from "react-string-format";
 import { getLocales } from "expo-localization";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -42,5 +43,6 @@ export const useTranslation = () => {
     locale,
     t: (scope) => i18n.t(scope, { locale }),
     setLocale,
+    format,
   };
 };
