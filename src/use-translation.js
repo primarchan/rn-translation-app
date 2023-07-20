@@ -9,6 +9,8 @@ const ko = require("./lang/lang.ko.json");
 const zh = require("./lang/lang.zh.json");
 
 const i18n = new I18n({ en, ja, ko, zh });
+i18n.enableFallback = true;
+i18n.defaultLocale = "ko";
 
 // 사용하는 기기의 언어 설정으로 셋팅
 const deviceLanguage = getLocales()[0].languageCode;
@@ -33,7 +35,9 @@ export const useTranslation = () => {
   };
 
   useEffect(() => {
-    init();
+    setTimeout(() => {
+      init();
+    }, 3000);
   }, []);
 
   return {
