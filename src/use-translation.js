@@ -1,6 +1,7 @@
 import { I18n } from "i18n-js";
-import { getLocales } from "expo-localization";
 import { useEffect, useState } from "react";
+import { getLocales } from "expo-localization";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const en = require("./lang/lang.en.json");
 const ja = require("./lang/lang.ja.json");
@@ -12,11 +13,27 @@ const i18n = new I18n({ en, ja, ko, zh });
 // 사용하는 기기의 언어 설정으로 셋팅
 const deviceLanguage = getLocales()[0].languageCode;
 
+const LOCALE_KEY = "locale";
+
 export const useTranslation = () => {
-  const [locale, setLocale] = useState(null);
+  const [locale, _setLocale] = useState(null);
+
+  const setLocale = (v) => {
+    _setLocale(v);
+    AsyncStorage.setItem(LOCALE_KEY, v);
+  };
+
+  const init = async () => {
+    const fs = await AsyncStorage.getItem(LOCALE_KEY);
+    if (fs !== null) {
+      _setLocale(fs);
+    } else {
+      _setLocale(deviceLanguage);
+    }
+  };
 
   useEffect(() => {
-    setLocale(deviceLanguage);
+    init();
   }, []);
 
   return {
