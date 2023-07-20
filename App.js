@@ -1,12 +1,23 @@
+import { useEffect } from "react";
+import * as SplashScreen from "expo-splash-screen";
 import { StyleSheet, Text, View } from "react-native";
 
-import { useTranslation } from "./src/use-translation";
 import Button from "./src/Button";
 import { useCookie } from "./src/use-cookie";
+import { useTranslation } from "./src/use-translation";
+
+// Keep the splash screen visible while we fetch resources
+SplashScreen.preventAutoHideAsync();
 
 export default function App() {
   const { locale, t, setLocale } = useTranslation();
   const { cookieKey } = useCookie();
+
+  useEffect(() => {
+    setTimeout(() => {
+      SplashScreen.hideAsync();
+    }, 2000);
+  }, []);
 
   if (locale === null) return null;
 
