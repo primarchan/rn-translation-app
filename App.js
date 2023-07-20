@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import LottieView from "lottie-react-native";
 import * as SplashScreen from "expo-splash-screen";
 import { StyleSheet, Text, View } from "react-native";
 
@@ -6,6 +7,8 @@ import Button from "./src/Button";
 import LoadingView from "./src/LoadingView";
 import { useCookie } from "./src/use-cookie";
 import { useTranslation } from "./src/use-translation";
+import { useDate } from "./src/use-date";
+import { SafeAreaView } from "react-native";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -14,8 +17,9 @@ export default function App() {
 
   const { locale, t, setLocale, format } = useTranslation();
   const { cookieKey } = useCookie();
+  const { year, month, day } = useDate();
 
-  const toodayText = format(t("today_is"), 2023, 7, 21);
+  const toodayText = format(t("today_is"), year, month, day);
   const cookieText = t(cookieKey);
 
   useEffect(() => {
@@ -34,31 +38,44 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Text>{toodayText}</Text>
-      <Text>{cookieText}</Text>
+      <LottieView
+        autoPlay={true}
+        resizeMode="cover"
+        source={require("./assets/background.json")}
+        style={{ position: "absolute", zIndex: -1 }}
+      />
 
-      <View style={styles.buttonsContainer}>
-        <Button
-          onPress={() => setLocale("ko")}
-          isSelected={locale === "ko"}
-          text={"KO"}
-        />
-        <Button
-          onPress={() => setLocale("en")}
-          isSelected={locale === "en"}
-          text={"EN"}
-        />
-        <Button
-          onPress={() => setLocale("ja")}
-          isSelected={locale === "ja"}
-          text={"JA"}
-        />
-        <Button
-          onPress={() => setLocale("zh")}
-          isSelected={locale === "zh"}
-          text={"ZH"}
-        />
-      </View>
+      <SafeAreaView style={{ flex: 1 }}>
+        <View style={styles.topContainer}>
+          <Text style={styles.todayText}>{toodayText}</Text>
+          <Text style={styles.cookieText}>{cookieText}</Text>
+        </View>
+
+        <View style={styles.bottomContainer}>
+          <View style={styles.buttonsContainer}>
+            <Button
+              onPress={() => setLocale("ko")}
+              isSelected={locale === "ko"}
+              text={"KO"}
+            />
+            <Button
+              onPress={() => setLocale("en")}
+              isSelected={locale === "en"}
+              text={"EN"}
+            />
+            <Button
+              onPress={() => setLocale("ja")}
+              isSelected={locale === "ja"}
+              text={"JA"}
+            />
+            <Button
+              onPress={() => setLocale("zh")}
+              isSelected={locale === "zh"}
+              text={"ZH"}
+            />
+          </View>
+        </View>
+      </SafeAreaView>
     </View>
   );
 }
@@ -66,12 +83,33 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: "#fff",
-    backgroundColor: "purple",
-    alignItems: "center",
+  },
+  topContainer: {
+    flex: 3,
     justifyContent: "center",
+    alignItems: "center",
+  },
+  todayText: {
+    fontFamily: "RIDIBatang",
+    position: "absolute",
+    top: 70,
+    fontSize: 13,
+    color: "#8b658f",
+  },
+  cookieText: {
+    fontFamily: "RIDIBatang",
+    fontSize: 22,
+    color: "#372538",
+    textAlign: "center",
+    marginHorizontal: 30,
+  },
+  bottomContainer: {
+    flex: 1,
+    justifyContent: "flex-end",
   },
   buttonsContainer: {
     flexDirection: "row",
+    alignSelf: "center",
+    marginBottom: 25,
   },
 });

@@ -1,4 +1,3 @@
-import { useEffect, useRef } from "react";
 import { View } from "react-native";
 import LottieView from "lottie-react-native";
 
@@ -17,7 +16,7 @@ export default () => {
         autoPlay={true}
         // ref={ref}
         style={{ width: 150 }}
-        source={require("../assets/loading.json")}
+        source={require("../assets/loading.json")} // https://lottiefiles.com/97111-loading-spinner-dots
       />
     </View>
   );
