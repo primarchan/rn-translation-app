@@ -18,6 +18,9 @@
 
 - 앱 로딩 시 사용되는 `./assets/splach.png` 이미지 대신 Figma Template 사용
   - [공식문서 링크 클릭](https://www.figma.com/community/file/1155362909441341285/Expo-App-Icon-%26-Splash)
+- 앱 로딩 시 사용되는 애니메이션 라이브러리 Lottie 사용
+  - Installation : `npx expo install lottie-react-native`
+  - [공식문서 링크](https://docs.expo.dev/versions/latest/sdk/lottie/)
 
 ## 산출물
 

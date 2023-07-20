@@ -3,6 +3,7 @@ import * as SplashScreen from "expo-splash-screen";
 import { StyleSheet, Text, View } from "react-native";
 
 import Button from "./src/Button";
+import LoadingView from "./src/LoadingView";
 import { useCookie } from "./src/use-cookie";
 import { useTranslation } from "./src/use-translation";
 
@@ -15,18 +16,18 @@ export default function App() {
   const { cookieKey } = useCookie();
 
   useEffect(() => {
-    if (locale !== null && cookieKey !== "") {
+    if (cookieKey !== "") {
       setIsLoaded(true);
     }
-  }, [locale, cookieKey]);
+  }, [cookieKey]);
 
   useEffect(() => {
-    if (isLoaded) {
+    if (locale !== null) {
       SplashScreen.hideAsync();
     }
-  }, [isLoaded]);
+  }, [locale]);
 
-  // if (locale === null || cookieKey === "") return null;
+  if (!isLoaded) return <LoadingView />;
 
   return (
     <View style={styles.container}>
