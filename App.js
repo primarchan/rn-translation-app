@@ -1,3 +1,4 @@
+import { useFonts } from "expo-font";
 import { useEffect, useState } from "react";
 import LottieView from "lottie-react-native";
 import * as SplashScreen from "expo-splash-screen";
@@ -18,6 +19,9 @@ export default function App() {
   const { locale, t, setLocale, format } = useTranslation();
   const { cookieKey } = useCookie();
   const { year, month, day } = useDate();
+  const [fontsLoaded] = useFonts({
+    RIDIBatang: require("./assets/fonts/RIDIBatang.otf"),
+  });
 
   const toodayText = format(t("today_is"), year, month, day);
   const cookieText = t(cookieKey);
@@ -30,10 +34,10 @@ export default function App() {
   }, [cookieKey]);
 
   useEffect(() => {
-    if (locale !== null) {
+    if (locale !== null && fontsLoaded) {
       SplashScreen.hideAsync();
     }
-  }, [locale]);
+  }, [locale, fontsLoaded]);
 
   if (!isLoaded) return <LoadingView />;
 
