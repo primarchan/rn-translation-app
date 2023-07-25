@@ -1,6 +1,6 @@
-# React-Native 기반 카카오버스 클론코딩
+# React-Native 기반 번역 앱 프로젝트
 
-## 커맨드
+## Installation
 
 - `npx create-expo-app {프로젝트명}`
 - `npx expo start`
@@ -14,7 +14,7 @@
 - `npx expo install expo-splash-screen` ['공식문서 링크 클릭'](https://docs.expo.dev/versions/latest/sdk/splash-screen)
 - `sudo npm install --global expo-cli`
 
-## 참고 문서
+## Reference
 
 - 앱 로딩 시 사용되는 `./assets/splach.png` 이미지 대신 Figma Template 사용
   - [공식문서 링크 클릭](https://www.figma.com/community/file/1155362909441341285/Expo-App-Icon-%26-Splash)
@@ -28,6 +28,8 @@
   - [공식문서 링크 클릭](https://docs.expo.dev/versions/latest/sdk/font/)
   - Installation : `npx expo install expo-font`
 
-## 산출물
+## Result
 
-![result](/content/result.png)
+<p align="center">
+  <img src="./content/result.png" width="50%" height="50%" />
+</p>
